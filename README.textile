@@ -1,0 +1,8 @@
+ahoi Backend Form v1.0
+--------------
+Redaxo 4.5 Addon
+
+Provides a form class to ease development of Redaxo addons.
+
+(c) 2014 by studio ahoi
+
