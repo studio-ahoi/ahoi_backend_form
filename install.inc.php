@@ -23,7 +23,7 @@ Autoload::register();
 // Check for minimum requirementss
 $php_required = '5.3';
 $redaxo_required = '4.5';
-$pages_required = array();
+$pages_required = array('name' => '_ahoi_tools', 'version' => '1.0');
 
 $install = TRUE;
 $dependencies = new Dependencies($page); 
