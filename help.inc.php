@@ -15,7 +15,7 @@ include 'compat.inc.php';
 $page = 'ahoi_backend_form';
 
 // Autoloader
-Autoload::getInstance()->add(__DIR__.DS.'lib'.DS.'Form')->register();
+Autoload::getInstance()->add(__DIR__.DS.'lib')->register();
 
 
 // Page
