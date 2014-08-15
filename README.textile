@@ -8,7 +8,7 @@ p. Provides a form class set to simplify development of Redaxo addons.
 (c) 2014 by studio ahoi
 
 
-h1. Changelog ahoi Backend Form
+h2. Changelog
 
 * *Version 1.2*
 ** Added compatibility mode to run as standalone version
