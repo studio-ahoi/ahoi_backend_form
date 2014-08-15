@@ -2,14 +2,12 @@
 /**
  * Form Element
  *
- * @version 1.0 rev 131227
+ * @revision 131227
  * @author Daniel Weitenauer
  * @copyright (c) 2013 studio ahoi
  */
 
 namespace ahoi\Form\Elements;
-
-use ahoi\Tools\Structure;
 
 class categorylist extends ElementAbstract implements ElementInterface
 {
@@ -81,32 +79,28 @@ class categorylist extends ElementAbstract implements ElementInterface
 	 */
 	protected static function getCategoriesIndented($category_id = 0, $get_articles = FALSE, $indent = 0)
 	{
-        if (\OOAddon::isAvailable('_ahoi_tools')) {
-            return Structure::getCategoriesIndented($category_id, $get_articles, $indent);
+        $return = array();
+        if ($category_id == 0) {
+            $categories = \OOCategory::getRootCategories();
         } else {
-            $return = array();
-            if ($category_id == 0) {
-                $categories = \OOCategory::getRootCategories();
-            } else {
-                $categories = array(\OOCategory::getCategoryById($category_id));
-            }
-    
-            foreach ($categories as $c) {
-                $return[$c->getId()] = array(
-                    'name' => $c->getName().(!$c->isOnline() ? ' [offline]' : ''), 
-                    'indent' => $indent,
-                );
-    
-                $children = $c->getChildren();
-                if (is_array($children) && count($children) > 0) {
-                    $indent++;
-                    foreach ($children as $cc) {
-                        $return += self::getCategoriesIndented($cc->getId(), $get_articles, $indent);
-                    }
-                    $indent--;
-                }
-            }
-            return $return;
+            $categories = array(\OOCategory::getCategoryById($category_id));
         }
+
+        foreach ($categories as $c) {
+            $return[$c->getId()] = array(
+                'name' => $c->getName().(!$c->isOnline() ? ' [offline]' : ''), 
+                'indent' => $indent,
+            );
+
+            $children = $c->getChildren();
+            if (is_array($children) && count($children) > 0) {
+                $indent++;
+                foreach ($children as $cc) {
+                    $return += self::getCategoriesIndented($cc->getId(), $get_articles, $indent);
+                }
+                $indent--;
+            }
+        }
+        return $return;
     }
 }

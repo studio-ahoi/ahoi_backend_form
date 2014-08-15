@@ -2,7 +2,7 @@
 /**
  * Form class
  *
- * @version 1.0 rev 131227
+ * @revision 140815
  * @author Daniel Weitenauer
  * @copyright (c) 2013 studio ahoi
  */
@@ -126,7 +126,7 @@ class Form
 		try {				
 			$class = __NAMESPACE__.'\\Elements\\'.$element; // Variable class names always have to be fully qualified
 			if ($this->debug) {
-				echo 'Form element: '.$class."<br/>\n";
+				echo '<pre><strong>FORM ELEMENT:</strong> '.$class."</pre>";
 			}
 			
 			// Add element to fieldset
@@ -135,7 +135,7 @@ class Form
 			$new_element->debug($this->debug)->method($this->method);
 			$this->fieldsets[$fieldset_id]['elements'][] = $new_element;
 		} catch(Exception $e) { 
-			throw new Exception('ERROR IN '.__METHOD__.', constructing form element <pre>'.$class.'</pre>: '.$e->getMessage().'.'); 
+			throw new \Exception('ERROR IN '.__METHOD__.', constructing form element <pre>'.$class.'</pre>: '.$e->getMessage().'.'); 
 		}
 		return $this;
 	}
@@ -146,7 +146,8 @@ class Form
 	public function submission()
 	{
 		if ($this->debug) {
-			echo 'Post: <pre>'.print_r($_POST, TRUE).'</pre>';
+			echo '<pre><strong>POST:</strong> '.print_r($_POST, TRUE).'</pre>';
+			echo '<pre><strong>GET:</strong> '.print_r($_GET, TRUE).'</pre>';
 		}
 
 		$values = array();
@@ -160,7 +161,7 @@ class Form
 			}
 		}
 		if ($this->debug) {
-			echo 'Values: <pre>'.print_r($values, TRUE).'</pre>';
+			echo '<pre><strong>VALUES:</strong> '.print_r($values, TRUE).'</pre>';
 		}
 
 		return $values;
@@ -194,7 +195,7 @@ class Form
 			$output .= '</div>'."\n".'</div>'."\n";
 			
 			if ($this->debug) {
-				echo 'Form: <pre>'.print_r($this->fieldsets, TRUE).'</pre>';
+				echo '<pre><strong>FORM:</strong> '.print_r($this->fieldsets, TRUE).'</pre>';
 			}
 		} else {
 			$output = 'ERROR: Parameter "page" not set.';
@@ -228,7 +229,7 @@ class Form
 	protected function populateElements()
 	{
 		if ($this->debug) {
-			echo 'Presets: <pre>'.print_r($this->values, TRUE).'</pre>';
+			echo '<pre><strong>PRESETS:</strong> '.print_r($this->values, TRUE).'</pre>';
 		}
 
 		foreach ($this->fieldsets as $fk => $fv) {

@@ -2,7 +2,7 @@
 /**
  * Form Element
  *
- * @version 1.0 rev 131227
+ * @revision 131227
  * @author Daniel Weitenauer
  * @copyright (c) 2013 studio ahoi
  */

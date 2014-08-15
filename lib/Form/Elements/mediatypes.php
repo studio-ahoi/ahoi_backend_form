@@ -2,14 +2,12 @@
 /**
  * Form Element
  *
- * @version 1.0 rev 131227
+ * @revision 131227
  * @author Daniel Weitenauer
  * @copyright (c) 2013 studio ahoi
  */
 
 namespace ahoi\Form\Elements;
-
-use ahoi\Tools\Media;
 
 class mediatypes extends ElementAbstract implements ElementInterface
 {
@@ -75,33 +73,29 @@ class mediatypes extends ElementAbstract implements ElementInterface
 	 */
 	protected static function getMediaTypes($no_type = FALSE)
 	{
-        if (\OOAddon::isAvailable('_ahoi_tools')) {
-            return Media::getTypes($no_type);
-        } else {
-            global $REX, $I18N;
-            
-            $image_types = array();
-            
-            if (is_string($no_type)){
-                $image_types['none'] = $no_type;
-            }
-            
-            if (\OOAddon::isAvailable('image_manager')) {
-                $sql = \rex_sql::factory();
-                $sql->setQuery('SELECT * FROM '.$REX['TABLE_PREFIX'].'679_types ORDER BY status');
-                $count = $sql->getRows();
+        global $REX, $I18N;
         
-                for ($i = 0; $i < $count; $i++) {
-                    // Exclude systemtypes
-                    if ($sql->getValue("status") != 1) {
-                        $image_types[$sql->getValue('name')] = $sql->getValue('description').' ['.$sql->getValue('name').']';
-                    }
-                    $sql->next();
-                }	
-            } else {
-                $image_types[0] = $i18N->msg($this->page().'image_manager_not_available');
-            }
-            return $image_types;
+        $image_types = array();
+        
+        if (is_string($no_type)){
+            $image_types['none'] = $no_type;
         }
+        
+        if (\OOAddon::isAvailable('image_manager')) {
+            $sql = \rex_sql::factory();
+            $sql->setQuery('SELECT * FROM '.$REX['TABLE_PREFIX'].'679_types ORDER BY status');
+            $count = $sql->getRows();
+    
+            for ($i = 0; $i < $count; $i++) {
+                // Exclude systemtypes
+                if ($sql->getValue("status") != 1) {
+                    $image_types[$sql->getValue('name')] = $sql->getValue('description').' ['.$sql->getValue('name').']';
+                }
+                $sql->next();
+            }	
+        } else {
+            $image_types[0] = $i18N->msg($this->page().'image_manager_not_available');
+        }
+        return $image_types;
     }
 }

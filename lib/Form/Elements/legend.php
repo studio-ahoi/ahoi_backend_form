@@ -2,7 +2,7 @@
 /**
  * Form
  *
- * @version 1.1 rev 140526
+ * @revision 140526
  * @author Daniel Weitenauer
  * @copyright (c) 2013 studio ahoi
  */

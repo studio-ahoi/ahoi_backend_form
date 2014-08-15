@@ -2,18 +2,18 @@
 /**
  * ahoi Backend Form
  *
- * @version 1.1 rev 140526
+ * @revision 140526
  * @author Daniel Weitenauer
  * @copyright (c) 2014 studio ahoi
  */
 
 namespace ahoi\Form;
 
-use ahoi\Pages\Page_Abstract;
 use ahoi\Form\Form;
+use ahoi\Tools\Page\PageAbstract;
 use ahoi\Tools\Settings;
 
-class Config extends Page_Abstract
+class Config extends PageAbstract
 {
 	public function __construct()
 	{
@@ -34,27 +34,33 @@ class Config extends Page_Abstract
 		// Form
 		$form = new Form();
 		$form
+            #->debug(TRUE)
 			->id($I18N->msg($page.'_configuration'))
 			->page($page)
-			->subpage($this->getSubpage())
+			->subpage($subpage)
             ->submit($I18N->msg($page.'_submit'))
             ->abort($I18N->msg($page.'_abort'))
             			
 		    ->fieldset($this->getPage().'_demo') 		 
 			    ->element('hidden', 'hidden', array('label' => $I18N->msg($page.'_hidden'), 'value' => $settings['hidden']))
+                
 		    ->fieldset($this->getPage().'_text', $I18N->msg($page.'_text')) 		 
 			    ->element('textfield', 'textfield', array('label' => $I18N->msg($page.'_textfield'), 'description' => $I18N->msg($page.'_textfield_description'), 'value' => $settings['textfield']))
 			    ->element('textarea', 'textarea', array('label' => $I18N->msg($page.'_textarea'), 'class' => 'tinyMCEEditor ckeditor', 'value' => $settings['textarea']))
 			    ->element('readonly', 'readonly', array('value' => $I18N->msg($page.'_readonly_text')))
-		    ->fieldset($this->getPage().'_selection', $I18N->msg($page.'_selection')) 		 
-			    ->element('select', 'select', array('label' => $I18N->msg($page.'_select'), 'options' => array('ja' => $I18N->msg($page.'_ja'), 'nein' => $I18N->msg($page.'_nein')), 'value' => $settings['select']))
+		    
+            ->fieldset($this->getPage().'_selection', $I18N->msg($page.'_selection')) 		 
+			    ->element('select', 'select', array('label' => $I18N->msg($page.'_select'), 'options' => array('yes' => $I18N->msg($page.'_yes'), 'no' => $I18N->msg($page.'_no')), 'value' => $settings['select']))
 			    ->element('checkbox', 'checkbox', array('label' => $I18N->msg($page.'_checkbox'), 'value' => $settings['checkbox']))
+                
 		    ->fieldset($this->getPage().'_media', $I18N->msg($page.'_media')) 		 
 			    ->element('mediabutton', 'mediabutton', array('label' => $I18N->msg($page.'_mediabutton'), 'value' => $settings['mediabutton']))
 			    ->element('medialistbutton', 'medialistbutton', array('label' => $I18N->msg($page.'_medialistbutton'), 'value' => $settings['medialistbutton']))
+                
 		    ->fieldset($this->getPage().'_links', $I18N->msg($page.'_links')) 		 
 			    ->element('linkbutton', 'linkbutton', array('label' => $I18N->msg($page.'_linkbutton'), 'value' => $settings['linkbutton']))
 			    ->element('linklistbutton', 'linklistbutton', array('label' => $I18N->msg($page.'_linklistbutton'), 'value' => $settings['linklistbutton']))
+                
 		    ->fieldset($this->getPage().'_special', $I18N->msg($page.'_special')) 		 
 			    ->element('mediatypes', 'mediatypes', array('label' => $I18N->msg($page.'_mediatypes'), 'value' => $settings['mediatypes']))
 			    ->element('categorylist', 'categorylist', array('label' => $I18N->msg($page.'_categorylist'), 'multiple' => 1, 'value' => $settings['categorylist']))
@@ -72,8 +78,6 @@ class Config extends Page_Abstract
 }
 
 
-/**
- * Page
- */
+// Page
 $backend = new Config();
 $backend->run();

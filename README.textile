@@ -1,8 +1,20 @@
-ahoi Backend Form v1.0
---------------
-Redaxo 4.5 Addon
+h1. ahoi Backend Form v1.2
 
-Provides a form class to ease development of Redaxo addons.
+h2. Redaxo 4.5 Addon
 
+"GitHub":https://github.com/studio-ahoi/ahoi_backend_form 
+
+p. Provides a form class set to simplify development of Redaxo addons.
 (c) 2014 by studio ahoi
 
+
+h1. Changelog ahoi Backend Form
+
+* *Version 1.2*
+** Added compatibility mode to run as standalone version
+
+* *Version 1.1*
+** Refactored setup
+
+* *Version 1.0*
+** Initial Version
