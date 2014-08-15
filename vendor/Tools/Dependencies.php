@@ -2,7 +2,7 @@
 /**
  * Dependencies
  *
- * @version	1.0 rev 140202
+ * @revision 140805
  * @author Daniel Weitenauer
  * @copyright (c) 2014 studio ahoi
  */
@@ -37,7 +37,7 @@ class Dependencies
 		global $REX;
         
 		$install = TRUE;
-		if ($install && version_compare($REX['VERSION'].'.'.$REX['SUBVERSION'].'.'.$REX['MINORVERSION'], $redaxo_required) < 0) {
+		if ($install && version_compare($REX['VERSION'].'.'.$REX['SUBVERSION']/*.'.'.$REX['MINORVERSION']*/, $redaxo_required) < 0) {
 			$REX['ADDON']['installmsg'][$this->page] = 'The addon "'.$this->page.'" requires Redaxo version '.$redaxo_required.' or higher. Currently installed version: '.$REX['VERSION'].'.'.$REX['SUBVERSION'].'.'.$REX['MINORVERSION'].'.';
 			$install = FALSE;
 		}
