@@ -7,6 +7,8 @@ h2. Redaxo 4.5 Addon
 p. Provides a form class set to simplify development of Redaxo addons.
 (c) 2014 by studio ahoi
 
+h2. Wiki
+"Settings-Class":https://github.com/studio-ahoi/ahoi_backend_form/wiki
 
 h2. Changelog
 
