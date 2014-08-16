@@ -37,7 +37,7 @@ if (!$REX['SETUP']) {
         // Pages
         $REX['ADDON']['pages'][$page][] = array('', $I18N->msg($page.'_demo'));
         
-        // Settings
+        // Setup
         Init::setup($page);
     }
     // Frontend

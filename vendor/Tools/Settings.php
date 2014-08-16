@@ -5,7 +5,7 @@
  * Parses $REX values to files and vice versa
  * Proivides a static handler for module presets
  *
- * @revision 140726
+ * @version 140816
  * @author Daniel Weitenauer
  * @copyright (c) 2013 studio ahoi
  */
@@ -135,7 +135,7 @@ class Settings
 		$content = '$settings = array('.PHP_EOL;
 
 		foreach ($settings as $k => $v) {
-			$this->setProperty($k, $v);
+			\OOAddon::setProperty($this->page, $k, $v);
 			$content .= "\t".$this->encode($k, $v).','.PHP_EOL;
 		}
 		
@@ -163,7 +163,7 @@ class Settings
      *
      * @return  array       The settings array
 	 */
-	public function loadSettings()
+	public function loadSettings($ignore_missing_file = FALSE)
 	{
 		global $REX, $I18N;
 		
@@ -175,9 +175,9 @@ class Settings
 			include($filename);
 
 			foreach ($settings as $k => $v) {
-				$this->setProperty($k, $v);
+				\OOAddon::setProperty($this->page, $k, $v);
 			}
-		} else {
+		} elseif (!$ignore_missing_file) {
 			echo rex_warning($I18N->msg($this->page.'_cant_read_file', $filename));
 		}
 		
@@ -218,76 +218,4 @@ class Settings
 			return '"'.$key.'" => "'.$value.'"';
 		}
 	}
-
-	/**
-	 * Check if a Redaxo property is set
-     *
-     * @param   $key        The key to check
-     * @return  boolean     TRUE is the property exists
-	 */
-	public function isPropertySet($key)
-	{
-		global $REX;
-		
-		return isset($REX['ADDON'][$this->page][$key]) ;
-	}
-	
-	/**
-	 * Get a Redaxo property
-     *
-     * @param   $key        The key to get
-     * @return              The property value
-	 */
-	public function getProperty($key)
-	{
-		global $REX;
-		
-		if ($this->isPropertySet($key)) {
-			return $REX['ADDON'][$this->page][$key];
-		} else {
-			return NULL;
-		}
-	}
-	
-	/**
-	 * Set a Redaxo property
-     *
-     * @param   $key        The key to set
-     * @return  object      For method chaining
-	 */
-	public function setProperty($key, $value)
-	{
-		global $REX;
-		
-		$REX['ADDON'][$this->page][$key] = $value;
-		
-		return $this;
-	}
-    
-    /**
-     * Module preset handler
-     *
-     * Provides a central place to set REX-variables for modules
-     * the settings file is assumed at "data/presets/settings.inc.php"
-     *
-     * @param   $key        The key to set, preferably formatted as 'module:module_name'
-     * @param   $settings   The Module presets to be overwritten
-     * @param   $debug      TRUE = debugging output
-     * @return  array       Array with overwritten presets
-     */
-    public static function getModulePresets($key, $settings = array(), $debug = FALSE)
-    {
-        $file = new self('presets'); // Virtual addon 'presets'
-        $presets = $file->loadSettings();
-
-        if ($debug) echo '<pre>Preset File:<br/>'.print_r($presets, TRUE).'</pre>';
-        
-        if (isset($presets[$key])) {
-            $settings = array_merge($settings, $presets[$key]);
-        }
-        
-        if ($debug) echo '<pre>Settings<br/>'.print_r($settings, TRUE).'</pre>';
-
-        return $settings;
-    }
 }
