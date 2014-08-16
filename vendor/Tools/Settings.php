@@ -2,8 +2,7 @@
 /**
  * Settings
  *
- * Parses $REX values to files and vice versa
- * Proivides a static handler for module presets
+ * Parses $settings values to files and vice versa
  *
  * @version 140816
  * @author Daniel Weitenauer
@@ -163,7 +162,7 @@ class Settings
      *
      * @return  array       The settings array
 	 */
-	public function loadSettings($ignore_missing_file = FALSE)
+	public function loadSettings($silent = FALSE)
 	{
 		global $REX, $I18N;
 		
@@ -177,7 +176,7 @@ class Settings
 			foreach ($settings as $k => $v) {
 				\OOAddon::setProperty($this->page, $k, $v);
 			}
-		} elseif (!$ignore_missing_file) {
+		} elseif (!$silent) {
 			echo rex_warning($I18N->msg($this->page.'_cant_read_file', $filename));
 		}
 		

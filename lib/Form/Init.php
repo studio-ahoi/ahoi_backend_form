@@ -34,12 +34,6 @@ class Init
 			'categorylist'       => unserialize("a:1:{i:1;s:0:\"\";}"),
         );
 
-        if ($file->fileExists()) {
-		    $return = $file->loadSettings();
-        } else {
-		    $return = $file->initSettings($settings);
-        }
-        
-		return $return;
-	}
+		return $file->initSettings($settings);
+   	}
 }
