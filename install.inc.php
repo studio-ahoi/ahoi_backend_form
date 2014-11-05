@@ -2,18 +2,16 @@
 /**
  * ahoi Backend Form
  *
- * @revision 140814
+ * @revision 141105
  * @author Daniel Weitenauer
  * @copyright (c) 2014 studio ahoi
  */
 
-use ahoi\Tools\Autoload;
-use ahoi\Tools\Dependencies;
-use ahoi\Form\Init;
+use ahoi\Form\Autoload;
+use ahoi\Form\Config\Dependencies;
+use ahoi\Form\Config\Config;
 
 include 'compat.inc.php';
-
-$page = 'ahoi_backend_form';
 
 // Autoloader
 Autoload::getInstance()->add(__DIR__.DS.'lib')->register();
@@ -24,10 +22,8 @@ $redaxo_required = '4.5';
 $pages_required  = array();
 $install         = TRUE;
 
-$dependencies = new Dependencies($page); 
-if ($install) $install = $dependencies->checkPhp($php_required);
-if ($install) $install = $dependencies->checkRedaxo($redaxo_required);
-if ($install) $install = $dependencies->checkAddons($pages_required);
-if ($install) Init::setup($page);
+if ($install) $install = Dependencies::checkPhp(Config::PAGE, $php_required);
+if ($install) $install = Dependencies::checkRedaxo(Config::PAGE, $redaxo_required);
+if ($install) $install = Dependencies::checkAddons(Config::PAGE, $pages_required);
 
-$REX['ADDON']['install'][$page] = $install;
+$REX['ADDON']['install'][Config::PAGE] = $install;

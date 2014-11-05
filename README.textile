@@ -1,4 +1,4 @@
-h1. ahoi Backend Form v1.2
+h1. ahoi Backend Form v1.3
 
 h2. Redaxo 4.5 Addon
 
@@ -12,6 +12,9 @@ h2. Wiki
 "Settings-Class":https://github.com/studio-ahoi/ahoi_backend_form/wiki
 
 h2. Changelog
+
+* *Cersion 1.3*
+** Refactored classes
 
 * *Version 1.2*
 ** Added compatibility mode to run as standalone version

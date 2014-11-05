@@ -2,21 +2,16 @@
 /**
  * ahoi Backend Form
  *
- * @revision 140805
+ * @revision 141105
  * @author Daniel Weitenauer
  * @copyright (c) 2014 studio ahoi
  */
 
-use ahoi\Tools\Autoload;
-use ahoi\Tools\Page\Help;
-
-include 'compat.inc.php';
-
-$page = 'ahoi_backend_form';
+use ahoi\Form\Autoload;
+use ahoi\Form\Page\Help;
 
 // Autoloader
 Autoload::getInstance()->add(__DIR__.DS.'lib')->register();
-
 
 // Page
 $help = new Help();
