@@ -34,6 +34,7 @@ if (!$REX['SETUP']) {
         $REX['ADDON']['name'][Config::PAGE] = $I18N->msg(Config::PAGE.'_title');
         // Pages
         $REX['ADDON']['pages'][Config::PAGE][] = array('', $I18N->msg(Config::PAGE.'_demo'));
+        $REX['ADDON']['pages'][Config::PAGE][] = array('', $I18N->msg(Config::PAGE.'_help'));
         
         // Setup
         Config::initSettings();
