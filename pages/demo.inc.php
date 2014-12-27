@@ -2,16 +2,16 @@
 /**
  * ahoi Backend Form
  *
- * @revision 140526
+ * @revision 141105
  * @author Daniel Weitenauer
  * @copyright (c) 2014 studio ahoi
  */
 
-namespace ahoi\Form;
+namespace ahoi\Form\Page;
 
 use ahoi\Form\Form;
-use ahoi\Tools\Page\PageAbstract;
-use ahoi\Tools\Settings;
+use ahoi\Form\Config\Settings;
+use ahoi\Form\Page\PageAbstract;
 
 class Config extends PageAbstract
 {
